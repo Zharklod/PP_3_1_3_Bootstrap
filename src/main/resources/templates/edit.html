@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Edit</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        select {
+            width: 100% !important;
+            height: 60px !important;
+        }
+
+        .error {
+            margin: 5px;
+            color: red;
+        }
+
+        .navbar-dark .navbar-nav .nav-link {
+            color: white;
+        }
+
+        .form-center {
+            width: 400px;
+            margin: 0 auto;
+            padding-bottom: 25px;
+            text-align: center;
+        }
+
+        .form-group {
+            text-align: center;
+        }
+
+        .header-title {
+            height: 50px;
+            padding-top: 12px;
+            padding-left: 16px;
+            background-color: #F0F0F0;
+        }
+
+        .pl {
+            padding-left: 29px;
+            padding-right: 29px;
+        }
+
+        .vh {
+            height: 100vh;
+        }
+
+        .nav-link:focus {
+            outline: none; /* Убирает стандартное выделение */
+            box-shadow: none; /* Убирает тень */
+        }
+
+        .navbar-head {
+            padding: 9px 0 11px 0;
+        }
+
+        .pt-20 {
+            padding-top: 20px;
+            margin-left: 0;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-dark bg-dark p-0 shadow">
+        <div class="navbar-brand navbar-head nav-item text-left text-white px-3">
+            <h3>Edit user</h3>
+        </div>
+        <ul class="navbar-nav mr-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link px-3" href="/logout">Logout</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div class="row pt-20">
+    <div class="col-md-2 px-0">
+        <div class="d-flex flex-column flex-shrink-0 p-0 text-white">
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item">
+                    <a href="/admin" class="nav-link active no-refresh cursor">Admin</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/user" class="nav-link no-refresh">User</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-10 bg-light vh pl">
+        <!--/*@thymesVar id="edit" type=""*/-->
+        <p th:text="${edit}"></p>
+        <div class="tab-pane fade show active p-3" id="nav-home" role="tabpanel"
+             aria-labelledby="nav-home-tab">
+            <h5 class="header-title">Edit user</h5>
+            <form class="form-center" id="editUserForm" th:action="@{/admin/edit}" th:object="${user}" method="post">
+                <div>
+                    <div class="form-group">
+                        <label for="id">ID</label>
+                        <input type="number" class="form-control" id="id" th:value="${user.getId()}"
+                               name="id">
+                    </div>
+                    <div class="form-group">
+                        <label for="firstName">First name</label>
+                        <input type="text" class="form-control" id="firstName"
+                               th:value="${user.getFirstName()}"
+                               name="firstName" required>
+                        <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last name</label>
+                        <input type="text" class="form-control" id="lastName"
+                               th:value="${user.getLastName()}"
+                               name="lastName" required>
+                        <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" class="form-control" id="age"
+                               th:value="${user.getAge()}"
+                               name="age" required>
+                        <div th:if="${#fields.hasErrors('age')}" th:errors="*{age}" class="error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" th:field="*{email}"
+                               th:value="${user.getEmail()}"
+                               name="email" required>
+                        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                        <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Roles</label>
+                        <select class="form-control" multiple id="role" name="roles" required>
+                            <option th:each="role : ${roles}"
+                                    th:text="${#strings.substringAfter(role.getName(), 'ROLE_')}"
+                                    th:value="${role.getId()}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <div>
+                        <a class="btn btn-primary popup-btn mr-2" href="/admin">Close</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

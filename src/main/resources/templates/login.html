@@ -24,8 +24,8 @@
 <form th:action="@{/login}" class="dropdown w-25 p-5 mx-auto" th:method="post">
     <h1 class="h3 mb-3 fw-normal text-left"><strong> Please sign in</strong></h1>
     <div class="form-group">
-        <input type="text" id="email" name="email" class="form-control" placeholder="Email address" required />
-        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required />
+        <input type="text" id="email" name="email" class="form-control" placeholder="Email address" required/>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required/>
     </div>
     <button type="submit" class="w-100 btn btn-lg btn-primary">Sign in</button>
     <div th:if="${param.error}">

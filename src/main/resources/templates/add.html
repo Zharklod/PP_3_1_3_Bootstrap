@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        select {
+            width: 100% !important;
+            height: 60px !important;
+        }
+
+        .error {
+            margin: 5px;
+            color: red;
+        }
+
+        .navbar-dark .navbar-nav .nav-link {
+            color: white;
+        }
+
+        .btn-color {
+            background-color: green;
+            border-color: rgb(110 234 109);
+        }
+
+        .btn-color:hover {
+            color: rgb(232, 230, 227);
+            background-color: green;
+            border-color: #69e469;
+        }
+
+        .form-center {
+            width: 400px;
+            margin: 0 auto;
+            padding-bottom: 25px;
+            text-align: center;
+        }
+
+        .form-group {
+            text-align: center;
+        }
+
+        .header-title {
+            height: 50px;
+            padding-top: 12px;
+            padding-left: 16px;
+            background-color: #F0F0F0;
+        }
+
+        .pl {
+            padding-left: 29px;
+            padding-right: 29px;
+        }
+
+        .fw-extra-bold {
+            font-weight: 700;
+        }
+
+        .nav-link:focus {
+            outline: none; /* Убирает стандартное выделение */
+            box-shadow: none; /* Убирает тень */
+        }
+
+        .navbar-head {
+            padding: 9px 0 11px 0;
+        }
+
+        .pt-20 {
+            padding-top: 20px;
+            margin-left: 0;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-dark bg-dark p-0 shadow">
+        <div class="navbar-brand navbar-head nav-item text-left text-white px-3">
+            <span>Add new user <span class="fw-extra-bold" th:text="${user.username}"></span></span>
+            <span>with roles:</span>
+            <span th:each="role : ${roles}"
+                  th:text="${#strings.substring(role.roleName, 5)} + ' '"></span>
+        </div>
+        <ul class="navbar-nav mr-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link px-3" href="/logout">Logout</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div class="row pt-20">
+    <div class="col-md-2 px-0">
+        <div class="d-flex flex-column flex-shrink-0 p-0 text-white">
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item">
+                    <a href="/admin" class="nav-link active no-refresh cursor">Admin</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/user" class="nav-link no-refresh">User</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-10 bg-light pl">
+        <!--        /*@thymesVar id="add" type=""*/-->
+        <p th:text="${add}"></p>
+        <div class="tab-pane" id="nav-profile" role="tab" aria-labelledby="profile-tab">
+            <div class="header-title"><h5>Add new user</h5></div>
+            <form id="myForm" th:action="@{/admin/add}" th:object="${user}" method="post" class="form-center">
+                <div class="form-group">
+                    <label for="firstName">First name</label>
+                    <input type="text" class="form-control" id="firstName" th:field="*{firstName}" name="firstName"
+                           required>
+                    <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last name</label>
+                    <input type="text" class="form-control" id="lastName" th:field="*{lastName}" name="lastName"
+                           required>
+                    <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" class="form-control" id="age" th:field="*{age}" name="age" required>
+                    <div th:if="${#fields.hasErrors('age')}" th:errors="*{age}" class="error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email"
+                           th:field="*{email}" autocomplete="off" required>
+                    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" th:field="*{password}"
+                           name="password" autocomplete="new-password" required>
+                    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="role">Roles</label>
+                    <select class="form-control" multiple id="role" th:field="*{roles}" name="roles" required>
+                        <option th:each="role : ${roles}"
+                                th:text="${#strings.substring(role.roleName, 5)} + ' '"></span>
+                            th:value="${role.getId()}">
+                        </option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-color btn-primary">Add new user</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

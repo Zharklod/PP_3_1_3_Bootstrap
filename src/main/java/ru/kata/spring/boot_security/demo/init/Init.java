@@ -39,8 +39,8 @@ public class Init {
             roleRepository.save(role2);
         }
         //password - admin = admin, user = user
-        user1 = new User("admin", "admin","35","admin@gmail.com", "$2a$10$h18Jn0dnwb7pAuAWtFIydec0rXVDQrh7LzLJwvfW2zbc.QKP/4Rd.");
-        user2 = new User("user", "user","30","user@gmail.com", "$2a$10$wTLs8HzcVUW3yOKCknkrE.oug5dKkui9Rl26ga6zYdB7zIQ5WdzFq");
+        user1 = new User("admin", "admin", "35", "admin@gmail.com", "$2a$10$h18Jn0dnwb7pAuAWtFIydec0rXVDQrh7LzLJwvfW2zbc.QKP/4Rd.");
+        user2 = new User("user", "user", "30", "user@gmail.com", "$2a$10$wTLs8HzcVUW3yOKCknkrE.oug5dKkui9Rl26ga6zYdB7zIQ5WdzFq");
 
         Set<Role> roles1 = new HashSet<>();
         roles1.add(role1);
