@@ -75,7 +75,7 @@ public class AdminController {
     }
 
     @PostMapping("/edit")
-    public String editeUser(@ModelAttribute("user") User user, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+    public String editUser(@ModelAttribute("user") User user, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("roles", roleService.getRoles());
             return "edit";

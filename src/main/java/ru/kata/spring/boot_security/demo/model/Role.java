@@ -26,15 +26,6 @@ public class Role implements GrantedAuthority {
         this.roleName = roleName;
     }
 
-//    public Role(Long id) {
-//        this.id = id;
-//    }
-//
-//    public Role(Long id, String roleName) {
-//        this.id = id;
-//        this.roleName = roleName;
-//    }
-
     public Long getId() {
         return id;
     }
@@ -63,29 +54,6 @@ public class Role implements GrantedAuthority {
     public String getAuthority() {
         return roleName;
     }
-
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        Role role = (Role) o;
-//        return Objects.equals(id, role.id) && Objects.equals(roleName, role.roleName) && Objects.equals(users, role.users);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(id, roleName, users);
-//    }
-
-//    @Override
-//    public String toString() {
-//        return "Role{" +
-//                "id=" + id +
-//                ", name='" + roleName + '\'' +
-//                ", users=" + users +
-//                '}';
-//    }
-
 
     @Override
     public boolean equals(Object o) {
